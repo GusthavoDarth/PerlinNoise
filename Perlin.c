@@ -5,59 +5,57 @@
 #include "functions.h"
 
 const int screenWidth = 800;
-const int screenHeight = 400;
+const int screenHeight = 800;
 
 int main()
 { 
     DisplayMode currentMode = MODE_NORMAL;
-    int squareSize = 40;
-    int gridHeight = (screenHeight/squareSize) +1;
-    int gridWidth = (screenWidth/squareSize) +1;
-    int** screen = initMatrix(gridWidth, gridHeight);
+    int pointSize = 80;
+    int gridHeight = (screenHeight/pointSize) +1;
+    int gridWidth = (screenWidth/pointSize) +1;
+    floatMatrix grid = perlinGrid(gridHeight,gridWidth);
+    floatMatrix screen = createFloatMatrix((grid.rows*pointSize)-pointSize,(grid.cols*pointSize)-pointSize);
 
     InitWindow(screenWidth, screenHeight, "Perlin");
     SetTargetFPS(60);
      while (!WindowShouldClose())
     {
         BeginDrawing();
-            ClearBackground(GRAY);
-            
-            drawPerlin(currentMode, screenWidth, screenHeight, gridWidth, gridHeight, squareSize, screen);
 
-            DrawText(TextFormat("Size: %d",gridHeight),10,10,20, BLUE);
+            ClearBackground(GRAY);
+
+            perlinNoise(grid, screen, pointSize, currentMode);
+
         EndDrawing();
 
-        if(IsKeyPressed(KEY_SPACE)){
-            freeMatrix(screen, gridWidth);
-            screen = initMatrix(gridWidth, gridHeight);
-        }
-        if(IsKeyPressed(KEY_UP)){
-            if(squareSize < 80)
-            {
-                int oldGridWidth = gridWidth;
-
-                squareSize += 1;
-                gridHeight = (screenHeight/squareSize) +1;
-                gridWidth = (screenWidth/squareSize) +1;
-                freeMatrix(screen, oldGridWidth);
-                screen = initMatrix(gridWidth, gridHeight);
-            }
+        if(IsKeyPressed(KEY_SPACE))
+        {
+            
+            gridHeight = (screenHeight/pointSize) +1;
+            gridWidth = (screenWidth/pointSize) +1;
+            grid = perlinGrid(gridHeight, gridWidth);
+            screen = createFloatMatrix((grid.rows*pointSize)-pointSize,(grid.cols*pointSize)-pointSize);
         }
         if(IsKeyPressed(KEY_DOWN)){
-            if(squareSize > 1)
-            {
-                int oldGridWidth = gridWidth;
-
-                squareSize -= 1;
-                gridHeight = (screenHeight/squareSize) +1;
-                gridWidth = (screenWidth/squareSize) +1;
-                freeMatrix(screen, oldGridWidth);
-                screen = initMatrix(gridWidth, gridHeight);
-            }    
+            if(pointSize > 1){
+                pointSize -=1;
+                gridHeight = (screenHeight/pointSize) +1;
+                gridWidth = (screenWidth/pointSize) +1;
+                grid = perlinGrid(gridHeight,gridWidth);
+                screen = createFloatMatrix((grid.rows*pointSize)-pointSize,(grid.cols*pointSize)-pointSize);
+            }
+        }
+        if(IsKeyPressed(KEY_UP)){
+            if(pointSize < 100){
+                pointSize +=1;
+                gridHeight = (screenHeight/pointSize) +1;
+                gridWidth = (screenWidth/pointSize) +1;
+                grid = perlinGrid(gridHeight,gridWidth);
+                screen = createFloatMatrix((grid.rows*pointSize)-pointSize,(grid.cols*pointSize)-pointSize);
+            }
         }
 
         if (IsKeyPressed(KEY_ONE)) currentMode = MODE_NORMAL;
         if (IsKeyPressed(KEY_TWO)) currentMode = MODE_COLOR;
     }
-    freeMatrix(screen, gridWidth);
 }
