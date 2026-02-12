@@ -1,7 +1,5 @@
 # Perlin Noise
-
-## Goal
-my goal with this proejct was make a simple Perlin Noise generator using only C and Raylib to do the graphics
+I built a procedural terrain generation tool using Perlin noise algorithms, which is a core technique used in game development (e.g., Minecraft) and graphics to create natural-looking landscapes. This project demonstrates my understanding of complex algorithms, interpolation, and visual output programming.
 
 ## How to use the program
 When you start the program, it already shows a Perlin Noise grid, and you can create a new one just by pressing the space key.
