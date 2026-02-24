@@ -19,13 +19,19 @@ The program displays a grayscale grid representing Perlin noise values, which ca
 - **Resolution control:** Press `UP` and `DOWN` arrow keys to increase or decrease the grid resolution.
 - **Two visualization modes:** Press `1` or `2` to toggle between different visual representations of the noise (e.g., grayscale vs. color mapping).
 
-## How to Run
+## 🚀 How to Run
 
-### Prerequisites
-- GCC compiler (or any C compiler)
-- Windows (for the compiled .exe) or compile for your OS.
+### Dependencies
 
-### Compilation from Source
+- **Raylib**: The project uses the [Raylib](https://www.raylib.com/) library for graphics and input. You need to have it installed on your system.
+  - On **Windows**, you can download the pre-compiled library from the [official site](https://www.raylib.com/) or use a package manager like vcpkg.
+  - On **Linux**, you can install it via your package manager (e.g., `sudo apt install libraylib-dev` on Debian/Ubuntu).
+  - On **macOS**, you can use Homebrew: `brew install raylib`.
+
+### Compilation
+
+This project includes a **Makefile** for easy compilation. After installing Raylib:
+
 1.  Clone the repository:
     ```bash
     git clone https://github.com/GusthavoDarth/PerlinNoise.git
@@ -34,17 +40,15 @@ The program displays a grayscale grid representing Perlin noise values, which ca
     ```bash
     cd PerlinNoise
     ```
-3.  Compile the code:
+3.  Run `make` to compile the program:
     ```bash
-    gcc -o Perlin Perlin.c -Iinclude
+    make
     ```
-    *(Adjust the `-Iinclude` flag if your header files are in a different location.)*
+    This will generate an executable named `Perlin` (or `Perlin.exe` on Windows).
 
 ### Running
-- **On Windows:** Double-click the `Perlin.exe` file.
-- **On Linux/macOS:** Run `./Perlin` from the terminal in the project directory.
 
-### Compilation
-Navigate to the project root and run:
-```bash
-gcc -o Perlin Perlin.c -Iinclude
+- After compilation, simply run the executable:
+  ```bash
+  ./Perlin      # Linux/macOS
+  Perlin.exe    # Windows
