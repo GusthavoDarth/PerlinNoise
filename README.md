@@ -5,7 +5,7 @@
 ![GitHub stars](https://img.shields.io/github/stars/GusthavoDarth/PerlinNoise?style=social)
 ![GitHub license](https://img.shields.io/github/license/GusthavoDarth/PerlinNoise)
 
-[![GIF do programa em ação](https://github.com/GusthavoDarth/PerlinNoise/blob/main/gif/perlin_noise.gif)](https://github.com/GusthavoDarth/PerlinNoise)
+[![GIF do programa em ação](https://github.com/GusthavoDarth/PerlinNoise/blob/main/gif/perlin_noise.gif)
 
 ## 📋 Description
 
