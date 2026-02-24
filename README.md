@@ -25,6 +25,25 @@ The program displays a grayscale grid representing Perlin noise values, which ca
 - GCC compiler (or any C compiler)
 - Windows (for the compiled .exe) or compile for your OS.
 
+### Compilation from Source
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/GusthavoDarth/PerlinNoise.git
+    ```
+2.  Navigate to the project directory:
+    ```bash
+    cd PerlinNoise
+    ```
+3.  Compile the code:
+    ```bash
+    gcc -o Perlin Perlin.c -Iinclude
+    ```
+    *(Adjust the `-Iinclude` flag if your header files are in a different location.)*
+
+### Running
+- **On Windows:** Double-click the `Perlin.exe` file.
+- **On Linux/macOS:** Run `./Perlin` from the terminal in the project directory.
+
 ### Compilation
 Navigate to the project root and run:
 ```bash
