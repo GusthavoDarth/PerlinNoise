@@ -13,13 +13,13 @@ This project is a real-time Perlin noise generator written in C, designed to cre
 
 The program displays a grayscale grid representing Perlin noise values, which can be dynamically updated and have its resolution changed.
 
-## ✨ Features
+## 🎮 Controls
 
 - **Interactive generation:** Press `SPACE` to generate a new random noise grid.
 - **Resolution control:** Press `UP` and `DOWN` arrow keys to increase or decrease the grid resolution.
 - **Two visualization modes:** Press `1` or `2` to toggle between different visual representations of the noise (e.g., grayscale vs. color mapping).
 
-## 🎮 How to Run
+## How to Run
 
 ### Prerequisites
 - GCC compiler (or any C compiler)
