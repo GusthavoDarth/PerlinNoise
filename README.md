@@ -1,7 +1,31 @@
-# Perlin Noise
-I built a procedural terrain generation tool using Perlin noise algorithms, which is a core technique used in game development (e.g., Minecraft) and graphics to create natural-looking landscapes. This project demonstrates my understanding of complex algorithms, interpolation, and visual output programming.
 
-## How to use the program
-When you start the program, it already shows a Perlin Noise grid, and you can create a new one just by pressing the space key.
-Also, you can press both Up and Down arrow keys to increase or decrease the resolution of the Perlin Noise.
-I have added a second mode to see the Pelin Noise. Just press 1 or 2 to alternate between the two.
+# Perlin Noise Terrain Generator
+
+![GitHub repo size](https://img.shields.io/github/repo-size/GusthavoDarth/PerlinNoise)
+![GitHub stars](https://img.shields.io/github/stars/GusthavoDarth/PerlinNoise?style=social)
+![GitHub license](https://img.shields.io/github/license/GusthavoDarth/PerlinNoise)
+
+[**AQUI VOCÊ DEVE ADICIONAR UM GIF MOSTRANDO O PROGRAMA EM AÇÃO, COM AS TECLAS ESPAÇO E SETAS MUDANDO O RUÍDO**]
+
+## 📋 Description
+
+This project is a real-time Perlin noise generator written in C, designed to create natural-looking procedural terrain textures. It demonstrates core concepts used in game development (like Minecraft's terrain generation) and computer graphics: algorithmic noise generation, interpolation, and visual output.
+
+The program displays a grayscale grid representing Perlin noise values, which can be dynamically updated and have its resolution changed.
+
+## ✨ Features
+
+- **Interactive generation:** Press `SPACE` to generate a new random noise grid.
+- **Resolution control:** Press `UP` and `DOWN` arrow keys to increase or decrease the grid resolution.
+- **Two visualization modes:** Press `1` or `2` to toggle between different visual representations of the noise (e.g., grayscale vs. color mapping).
+
+## 🎮 How to Run
+
+### Prerequisites
+- GCC compiler (or any C compiler)
+- Windows (for the compiled .exe) or compile for your OS.
+
+### Compilation
+Navigate to the project root and run:
+```bash
+gcc -o Perlin Perlin.c -Iinclude
