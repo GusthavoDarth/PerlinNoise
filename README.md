@@ -19,6 +19,13 @@ The program displays a grayscale grid representing Perlin noise values, which ca
 - **Resolution control:** Press `UP` and `DOWN` arrow keys to increase or decrease the grid resolution.
 - **Two visualization modes:** Press `1` or `2` to toggle between different visual representations of the noise (e.g., grayscale vs. color mapping).
 
+## ✨ What I Learned & Key Challenges
+
+- **Implementing Perlin Noise from Scratch:** Understanding the algorithm deeply—from gradient generation to interpolation—was a rewarding challenge in mathematical thinking and translation of theory into efficient C code.
+- **Real-time Interaction with Raylib:** Integrating user input (key presses) with immediate visual feedback required careful structuring of the game loop and state management.
+- **Visual Mapping:** Creating two visualization modes taught me how to map numerical noise values to different color palettes, reinforcing concepts of data visualization.
+- **Build System with Make:** Writing a Makefile to handle dependencies (Raylib) and compilation flags improved my understanding of the build process in C projects.
+
 ## 🚀 How to Run
 
 ### Dependencies
