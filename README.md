@@ -9,7 +9,7 @@
 
 ## 📋 Description
 
-This project is a real-time Perlin noise generator written in C, designed to create natural-looking procedural terrain textures. It demonstrates core concepts used in game development (like Minecraft's terrain generation) and computer graphics: algorithmic noise generation, interpolation, and visual output.
+This project is a real-time Perlin noise generator written in C, designed to create natural-looking procedural terrain textures. It demonstrates core concepts used in game development (similar to basic noise used in terrain generation) and computer graphics: algorithmic noise generation, interpolation, and visual output.
 
 The program displays a grayscale grid representing Perlin noise values, which can be dynamically updated and have its resolution changed.
 
