@@ -1,3 +1,5 @@
+#include <math.h>
+
 typedef enum {
     MODE_NORMAL,
     MODE_COLOR
@@ -66,58 +68,56 @@ Color viewType(DisplayMode currentMode, float total)
     return pixelColor;
 }
 
-floatMatrix perlinGrid(int rows, int cols)
+void generateGradients(floatMatrix gradX, floatMatrix gradY)
 {
-    floatMatrix matrix = createFloatMatrix(rows, cols);
-    if(matrix.data == NULL) return matrix;
-    for(int i = 0; i < rows; i++)
+    if (gradX.data == NULL || gradY.data == NULL) return;
+    for (int i = 0; i < gradX.rows; i++)
     {
-        for(int j = 0; j < cols; j++)
+        for (int j = 0; j < gradX.cols; j++)
         {
-            matrix.data[i][j] = ((float)rand()/(float)(RAND_MAX));
+            float angle = ((float)rand() / (float)RAND_MAX) * 2.0f * 3.14159265f;
+            gradX.data[i][j] = cosf(angle);
+            gradY.data[i][j] = sinf(angle);
         }
     }
-    return matrix;
 }
 
-void perlinNoise(floatMatrix grid, floatMatrix screen, int pointSize, DisplayMode currentMode)
+void perlinNoise(floatMatrix gradX, floatMatrix gradY, floatMatrix screen, int pointSize, DisplayMode currentMode)
 {
-    if (grid.data == NULL || screen.data == NULL) return;
+    if(gradX.data == NULL || gradY.data == NULL || screen.data == NULL) return;
 
     Color pixelColor;
-    int x0;
-    int y0;
-    int x1;
-    int y1;
-
-    float fx;
-    float fy;
-
-    float fracX;
-    float fracY;
-    float top;
-    float bottom;
-    float total;
 
     for(int i = 0; i < screen.rows; i++)
     {
-        fx = (float)i / (float)pointSize;
-        x0 = (int)fx;
-        x1 = x0 + 1;
-        fracX = fx - x0;
+        float fx = (float)i / (float)pointSize;
+        int x0 = (int)fx;
+        int x1 = x0 + 1;
+        float fracX = fx - x0;
+        float u = smoothstep(0.0f, 1.0f, fracX);
 
         for(int j = 0; j < screen.cols; j++)
         {
-            fy = (float)j / (float)pointSize;
-            y0 = (int)fy;
-            y1 = y0 + 1;
-            fracY = fy - y0;
+            float fy = (float)j / (float)pointSize;
+            int y0 = (int)fy;
+            int y1 = y0 + 1;
+            float fracY = fy - y0;
+            float v = smoothstep(0.0f, 1.0f, fracY);
 
-            float top = lerp(grid.data[x0][y0],grid.data[x1][y0],fracX);
-            float bottom = lerp(grid.data[x0][y1],grid.data[x1][y1],fracX);
-            float total = lerp(top,bottom,fracY);
+            float n00 = gradX.data[x0][y0] * fracX       + gradY.data[x0][y0] * fracY;
+            float n10 = gradX.data[x1][y0] * (fracX - 1) + gradY.data[x1][y0] * fracY;
+            float n01 = gradX.data[x0][y1] * fracX       + gradY.data[x0][y1] * (fracY - 1);
+            float n11 = gradX.data[x1][y1] * (fracX - 1) + gradY.data[x1][y1] * (fracY - 1);
 
-            pixelColor = viewType(currentMode, total*255);
+            float top    = lerp(n00, n10, u);
+            float bottom = lerp(n01, n11, u);
+            float total  = lerp(top, bottom, v);
+
+            float normalized = (total + 0.7071f) / (2.0f * 0.7071f);
+            if(normalized < 0.0f) normalized = 0.0f;
+            if(normalized > 1.0f) normalized = 1.0f;
+
+            pixelColor = viewType(currentMode, normalized * 255.0f);
             DrawPixel(i, j, pixelColor);
         }
     }

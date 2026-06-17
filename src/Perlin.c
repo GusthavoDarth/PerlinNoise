@@ -16,14 +16,16 @@ int main()
     int gridHeight = (screenHeight/pointSize) +1;
     int gridWidth = (screenWidth/pointSize) +1;
 
-    floatMatrix grid = {0};
-    freeMatrix(grid);
-    grid = perlinGrid(gridHeight,gridWidth);
+    floatMatrix gradX = {0};
+    floatMatrix gradY = {0};
+    gradX = createFloatMatrix(gridHeight, gridWidth);
+    gradY = createFloatMatrix(gridHeight, gridWidth);
+    generateGradients(gradX, gradY);
 
 
     floatMatrix screen = {0};
     freeMatrix(screen);
-    screen = createFloatMatrix((grid.rows*pointSize)-pointSize,(grid.cols*pointSize)-pointSize);
+    screen = createFloatMatrix((gradX.rows*pointSize)-pointSize, (gradX.cols*pointSize)-pointSize);
 
     InitWindow(screenWidth, screenHeight, "Perlin");
     SetTargetFPS(60);
@@ -33,7 +35,7 @@ int main()
 
             ClearBackground(GRAY);
 
-            perlinNoise(grid, screen, pointSize, currentMode);
+            perlinNoise(gradX, gradY, screen, pointSize, currentMode);
 
         EndDrawing();
 
@@ -42,20 +44,26 @@ int main()
 
             gridHeight = (screenHeight/pointSize) +1;
             gridWidth = (screenWidth/pointSize) +1;
-            freeMatrix(grid);
+            freeMatrix(gradX);
+            freeMatrix(gradY);
             freeMatrix(screen);
-            grid = perlinGrid(gridHeight, gridWidth);
-            screen = createFloatMatrix((grid.rows*pointSize)-pointSize,(grid.cols*pointSize)-pointSize);
+            gradX = createFloatMatrix(gridHeight, gridWidth);
+            gradY = createFloatMatrix(gridHeight, gridWidth);
+            generateGradients(gradX, gradY);
+            screen = createFloatMatrix((gradX.rows*pointSize)-pointSize, (gradX.cols*pointSize)-pointSize);
         }
         if(IsKeyPressed(KEY_DOWN)){
             if(pointSize > 1){
                 pointSize -=1;
                 gridHeight = (screenHeight/pointSize) +1;
                 gridWidth = (screenWidth/pointSize) +1;
-                freeMatrix(grid);
+                freeMatrix(gradX);
+                freeMatrix(gradY);
                 freeMatrix(screen);
-                grid = perlinGrid(gridHeight,gridWidth);
-                screen = createFloatMatrix((grid.rows*pointSize)-pointSize,(grid.cols*pointSize)-pointSize);
+                gradX = createFloatMatrix(gridHeight, gridWidth);
+                gradY = createFloatMatrix(gridHeight, gridWidth);
+                generateGradients(gradX, gradY);
+                screen = createFloatMatrix((gradX.rows*pointSize)-pointSize, (gradX.cols*pointSize)-pointSize);
             }
         }
         if(IsKeyPressed(KEY_UP)){
@@ -63,16 +71,21 @@ int main()
                 pointSize +=1;
                 gridHeight = (screenHeight/pointSize) +1;
                 gridWidth = (screenWidth/pointSize) +1;
-                freeMatrix(grid);
+                freeMatrix(gradX);
+                freeMatrix(gradY);
                 freeMatrix(screen);
-                grid = perlinGrid(gridHeight,gridWidth);
-                screen = createFloatMatrix((grid.rows*pointSize)-pointSize,(grid.cols*pointSize)-pointSize);
+                gradX = createFloatMatrix(gridHeight, gridWidth);
+                gradY = createFloatMatrix(gridHeight, gridWidth);
+                generateGradients(gradX, gradY);
+                screen = createFloatMatrix((gradX.rows*pointSize)-pointSize, (gradX.cols*pointSize)-pointSize);
             }
         }
 
         if(IsKeyPressed(KEY_ONE)) currentMode = MODE_NORMAL;
         if(IsKeyPressed(KEY_TWO)) currentMode = MODE_COLOR;
     }
-    freeMatrix(grid);
-    freeMatrix(screen);
+     freeMatrix(gradX);
+     freeMatrix(gradY);
+     freeMatrix(screen);
+     CloseWindow();
 }
